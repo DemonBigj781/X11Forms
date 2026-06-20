@@ -42,6 +42,7 @@ namespace System.Windows.Forms {
 		private Environment.SpecialFolder rootFolder = Environment.SpecialFolder.Desktop;
 		private string selectedPath = string.Empty;
 		private bool showNewFolderButton = true;
+		private bool useDescriptionForTitle;
 		
 		private Label descriptionLabel;
 		private Button cancelButton;
@@ -183,6 +184,7 @@ namespace System.Windows.Forms {
 		public string Description {
 			set {
 				descriptionLabel.Text = value;
+				UpdateDialogTitle ();
 			}
 			
 			get {
@@ -241,6 +243,23 @@ namespace System.Windows.Forms {
 				return showNewFolderButton;
 			}
 		}
+
+		[Browsable (true)]
+		[DefaultValue (false)]
+		[Localizable (false)]
+		public bool UseDescriptionForTitle {
+			get {
+				return useDescriptionForTitle;
+			}
+
+			set {
+				if (useDescriptionForTitle == value)
+					return;
+
+				useDescriptionForTitle = value;
+				UpdateDialogTitle ();
+			}
+		}
 		#endregion	// Public Instance Properties
 		
 		#region Public Instance Methods
@@ -250,6 +269,7 @@ namespace System.Windows.Forms {
 			RootFolder = Environment.SpecialFolder.Desktop;
 			selectedPath = string.Empty;
 			ShowNewFolderButton = true;
+			UseDescriptionForTitle = false;
 		}
 		
 		protected override bool RunDialog (IntPtr hWndOwner)
@@ -288,6 +308,14 @@ namespace System.Windows.Forms {
 		{
 			if (form.Visible && okButton.Enabled)
 				okButton.Select ();
+		}
+
+		private void UpdateDialogTitle ()
+		{
+			if (useDescriptionForTitle && !string.IsNullOrEmpty (descriptionLabel.Text))
+				form.Text = descriptionLabel.Text;
+			else
+				form.Text = "Browse For Folder";
 		}
 		
 		private void WriteConfigValues ()

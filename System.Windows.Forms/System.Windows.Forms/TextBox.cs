@@ -58,6 +58,7 @@ namespace System.Windows.Forms {
 		private int auto_complete_selected_index = -1;
 		private List<string> auto_complete_matches;
 		private ComboBox auto_complete_cb_source;
+		private string placeholder_text = string.Empty;
 		#endregion	// Variables
 
 		#region Public Constructors
@@ -567,6 +568,25 @@ namespace System.Windows.Forms {
 
 					OnTextAlignChanged(EventArgs.Empty);
 				}
+			}
+		}
+
+		[Browsable (true)]
+		[DefaultValue ("")]
+		[Localizable (true)]
+		[MWFCategory ("Appearance")]
+		public string PlaceholderText {
+			get {
+				return placeholder_text;
+			}
+
+			set {
+				string new_value = value ?? string.Empty;
+				if (placeholder_text == new_value)
+					return;
+
+				placeholder_text = new_value;
+				Invalidate ();
 			}
 		}
 		#endregion	// Public Instance Properties
