@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
+    <NoWarn>$(NoWarn);CA1416</NoWarn>
     <Authors>Various Mono authors, Daniel Van Noord</Authors>
     <Company>None</Company>
     <Description>A .Net Core implementation of the Mono Web Browser library.</Description>

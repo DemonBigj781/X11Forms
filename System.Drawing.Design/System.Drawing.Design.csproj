@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
+    <NoWarn>$(NoWarn);CA1416</NoWarn>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Copyright>(c) Various Mono authors, Daniel Van Noord 2019</Copyright>
     <Authors>Various Mono authors, Daniel Van Noord</Authors>
